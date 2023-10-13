@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crono</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        #cronometro {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        #botones {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="cronometro">0:00:00</div>
+    <div id="botones">
+        <button onclick="iniciarCronometro()">Iniciar</button>
+        <button onclick="pararCronometro()">Parar</button>
+        <button onclick="reiniciarCronometro()">Reiniciar</button>
+    </div>
+
+    <script>
+        let cronometro;
+        let segundos = 0;
+        let minutos = 0;
+        let horas = 0;
+        let enEjecucion = false;
+
+        function iniciarCronometro() {
+            if (!enEjecucion) {
+                enEjecucion = true;
+                cronometro = setInterval(function () {
+                    segundos++;
+                    if (segundos === 60) {
+                        segundos = 0;
+                        minutos++;
+                        if (minutos === 60) {
+                            minutos = 0;
+                            horas++;
+                        }
+                    }
+                    actualizarCronometro();
+                }, 1000);
+            }
+        }
+
+        function pararCronometro() {
+            enEjecucion = false;
+            clearInterval(cronometro);
+        }
+
+        function reiniciarCronometro() {
+            enEjecucion = false;
+            clearInterval(cronometro);
+            segundos = 0;
+            minutos = 0;
+            horas = 0;
+            actualizarCronometro();
+        }
+
+        function actualizarCronometro() {
+            document.getElementById('cronometro').textContent = horas + ':' + (minutos < 10 ? '0' : '') + minutos + ':' + (segundos < 10 ? '0' : '') + segundos;
+        }
+    </script>
+</body>
+
+</html>

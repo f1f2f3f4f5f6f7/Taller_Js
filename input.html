@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <input type="text" id="texto">
+        <button type="button" onclick="agregarElemento()">Agregar</button>
+        <button type="button" onclick="borrarElemento()">Borrar</button>
+    </form>
+
+    <ul id="lista"></ul>
+
+    <script>
+        function agregarElemento() {
+            var texto = document.getElementById("texto").value;
+            texto = texto.toLowerCase();
+            var lista = document.getElementById("lista");
+            var nuevoElemento = document.createElement("li");
+            nuevoElemento.textContent = texto;
+            lista.insertBefore(nuevoElemento, lista.firstChild);
+        }
+
+        function borrarElemento() {
+            var lista = document.getElementById("lista");
+            if (lista.firstChild) {
+                lista.removeChild(lista.firstChild);
+            } else {
+                alert("No hay elementos para borrar.");
+            }
+        }
+    </script>
+</body>
+</html>
